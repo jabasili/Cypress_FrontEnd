@@ -83,3 +83,41 @@ Cypress.Commands.add('ValidaçãoMensagem', () => {
     cy.get('p').invoke('text')
         .should('contain','Your data has been successfully stored into the database. ')
 })
+
+Cypress.Commands.add('SalvaVolta', () => {
+    cy.get('#save-and-go-back-button')
+        .click()
+})
+
+Cypress.Commands.add('BuscaRegistro', () => {
+    cy.get(':nth-child(3) > .form-control')
+        .type('Teste Sicredi')
+})
+
+Cypress.Commands.add('SelecionaRegistro', () => {
+    cy.wait(3000)
+    cy.get('input[class="select-row"]')
+        .check()
+})
+
+Cypress.Commands.add('SolicitaDelete', () => {
+    cy.get('a[class="btn btn-outline-dark delete-selected-button"]')
+        .click()
+})
+
+Cypress.Commands.add('ValidarMsgpopUp', () => {
+    cy.get('.alert-delete-multiple-one')
+        .invoke('text')
+        .should('contain','Are you sure that you want to delete this 1 item?')
+})
+
+Cypress.Commands.add('CliqueBotaoDelete', () => {
+    cy.get('button[class="btn btn-danger delete-multiple-confirmation-button"]')
+        .click()
+})
+
+Cypress.Commands.add('ValidaMsgRegistroApagado', () => {
+    cy.get('[data-growl="message"] > p')
+        .invoke('text')
+        .should('contain', 'Your data has been successfully deleted from the database.')
+})
